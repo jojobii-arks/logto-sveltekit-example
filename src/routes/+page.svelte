@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import type { PageData } from './$types';
 
 	let openDialog = true;
+
+	export let data: PageData;
+	console.log(data);
 </script>
 
 <div class="h-full w-full flex justify-center items-center mx-auto flex-col">
@@ -36,6 +40,14 @@
 					</button>
 				</dialog>
 			{/if}
+			<br />
+			<button
+				on:click={async () => {
+					const res = await (await fetch('/api/ping')).json();
+					console.log(res);
+				}}
+				class="bg-red-400">ping</button
+			>
 		</p>
 	</div>
 </div>

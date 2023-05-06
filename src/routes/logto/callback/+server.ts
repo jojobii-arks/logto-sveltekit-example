@@ -14,5 +14,6 @@ export const GET: RequestHandler = async ({ locals, url }) => {
 		});
 	}
 
+	// redirect to route once signed in
 	throw redirect(303, '/protected');
 };

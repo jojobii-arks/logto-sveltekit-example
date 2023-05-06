@@ -1,24 +1,25 @@
-import { redirect } from '@sveltejs/kit';
+// import { redirect } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
 import { LogtoAuthHandler, UserScope } from '@cntr/sveltekit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { env } from '$env/dynamic/public';
 
-const authenticationHandler: Handle = async ({ event, resolve }) => {
-	const authenticated = await event.locals.logto.isAuthenticated();
-	if (event.url.pathname.includes('/protected') && !authenticated) {
-		throw redirect(
-			303,
-			'/?error=This is a protected route, please login before accessing this page'
-		);
-	}
+// const authenticationHandler: Handle = async ({ event, resolve }) => {
+// 	const authenticated = await event.locals.logto.isAuthenticated();
 
-	if (event.url.pathname === '/' && authenticated) {
-		throw redirect(301, '/protected');
-	}
+// if (event.url.pathname.includes('/protected') && !authenticated) {
+// 	throw redirect(
+// 		303,
+// 		'/?error=This is a protected route, please login before accessing this page'
+// 	);
+// }
 
-	return await resolve(event);
-};
+// if (event.url.pathname === '/' && authenticated) {
+// 	throw redirect(301, '/protected');
+// }
+
+// 	return await resolve(event);
+// };
 
 const setLogtoAuthenticatedUser: Handle = async ({ event, resolve }) => {
 	try {
@@ -36,6 +37,6 @@ export const handle = sequence(
 		UserScope.Email,
 		UserScope.Profile
 	]),
-	authenticationHandler,
+	// authenticationHandler,
 	setLogtoAuthenticatedUser
 );
